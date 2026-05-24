@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TreatmentExplorer from "../components/TreatmentExplorer";
+import ReviewCarousel from "../components/ReviewCarousel";
+import FAQAccordion from "../components/FAQAccordion";
+import { categories, treatments } from "../data/treatments";
+import { reviews } from "../data/reviews";
+import { faqs } from "../data/faqs";
+import { site } from "../config/site";
+
+const mailTo = `mailto:${site.contactEmail}?subject=Consulta%20Dra%20Ailen%20Beget%20Dermatolog%C3%ADa%20%26%20Est%C3%A9tica`;
+---
+
+<BaseLayout>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label={site.name}>
+      <img src="/logo.svg" alt="" width="44" height="44" />
+      <strong>Dra Ailen Beget</strong>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="#top">Inicio</a>
+      <a href="#tratamientos">Tratamientos</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#faq">Preguntas frecuentes</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="header-cta" href={site.whatsappUrl} rel="noreferrer" target="_blank">Reservar turno</a>
+  </header>
+
+  <main id="top">
+    <section class="hero section-band">
+      <div class="hero-copy">
+        <p class="eyebrow">Dra Ailen Beget Dermatología &amp; Estética</p>
+        <h1>Piel sana, luminosa y en armonía con vos</h1>
+        <p>
+          Dermatología clínica y estética médica con una mirada natural, moderna y personalizada.
+          Un espacio para cuidar tu piel con criterio, sutileza y resultados que acompañen tus rasgos.
+        </p>
+        <div class="quick-links" aria-label="Accesos rapidos">
+          <a href="#nosotros">Consulta dermatológica</a>
+          <a href="#tratamientos">Estética facial</a>
+          <a href={site.whatsappUrl} rel="noreferrer" target="_blank">Turnos por WhatsApp</a>
+          <a href={site.instagramUrl} rel="noreferrer" target="_blank">Ver Instagram</a>
+        </div>
+        <div class="hero-actions">
+          <a class="button primary" href={site.whatsappUrl} rel="noreferrer" target="_blank">Consultar por WhatsApp</a>
+          <a class="button secondary" href="#tratamientos">Ver tratamientos</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Tratamiento facial estetico en consultorio">
+        <img
+          alt="Paciente recibiendo un tratamiento facial en un consultorio luminoso"
+          src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=85"
+        />
+        <div class="hero-note">
+          <strong>Atención personalizada</strong>
+          <span>Protocolos a medida para cada piel.</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section class="section-band treatments-section" id="tratamientos">
+      <div class="section-heading">
+        <p class="eyebrow">Tratamientos</p>
+        <h2>Opciones para cuidar, mejorar y acompañar tu piel.</h2>
+        <p>
+          Protocolos pensados para distintas necesidades: salud dermatológica, estética facial,
+          aparatología, cuidado corporal y acompañamiento capilar.
+        </p>
+      </div>
+      <TreatmentExplorer client:load treatments={treatments} categories={categories} />
+    </section>
+
+    <hr class="section-divider" />
+
+    <section class="section-band split-section about-section" id="nosotros">
+      <div class="story-copy">
+        <p class="eyebrow">Sobre la Dra Ailen Beget</p>
+        <h2>Una mirada clínica, estética y cercana.</h2>
+        <p>
+          Cada consulta parte de una <strong>evaluación 1:1 personalizada</strong>: escuchar,
+          entender qué necesita tu piel y definir prioridades reales. La propuesta combina una
+          <strong>mirada 360 clínica y estética</strong>, con procedimientos que buscan mejorar
+          textura, luminosidad y bienestar sin perder naturalidad.
+        </p>
+        <p>
+          El objetivo es que salgas con un plan claro, posible y cuidado, evitando recetas genéricas
+          y eligiendo tratamientos que respeten tus tiempos, tu piel y tus rasgos.
+        </p>
+      </div>
+      <div class="about-visual">
+        <img alt="Detalle de tratamiento facial dermatológico" src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1100&q=85" />
+        <div class="about-card">
+          <span>1:1</span>
+          <p>Evaluación personalizada y plan progresivo.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section class="section-band google-section">
+      <div class="section-heading">
+        <p class="eyebrow">Experiencias</p>
+        <h2>Reseñas y confianza desde Google.</h2>
+      </div>
+      <ReviewCarousel client:load reviews={reviews} googleReviewsUrl={site.googleReviewsUrl} />
+    </section>
+
+    <hr class="section-divider" />
+
+    <section class="section-band faq-section" id="faq">
+      <div class="section-heading">
+        <p class="eyebrow">Antes de reservar</p>
+        <h2>Preguntas frecuentes.</h2>
+      </div>
+      <FAQAccordion client:load faqs={faqs} />
+    </section>
+
+    <hr class="section-divider" />
+
+    <section class="section-band location-section" id="contacto">
+      <div class="location-copy">
+        <p class="eyebrow">Contacto y ubicación</p>
+        <h2>Reservemos tu próxima consulta.</h2>
+        <p>
+          Estamos en Canning, cerca del local de Atalaya sobre la Ruta 205.
+          Escribinos por WhatsApp, Instagram o mail para coordinar turnos y recibir orientación previa.
+        </p>
+        <div class="contact-actions inline">
+          <a class="button primary" href={site.whatsappUrl} rel="noreferrer" target="_blank">WhatsApp</a>
+          <a class="button secondary" href={site.instagramUrl} rel="noreferrer" target="_blank">Instagram</a>
+          <a class="button secondary" href={mailTo}>Mail</a>
+        </div>
+      </div>
+      <div class="map-frame">
+        <iframe
+          title="Ubicación de Dra Ailen Beget Dermatología & Estética"
+          src={site.mapsEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Dra Ailen Beget Dermatología &amp; Estética</span>
+    <span>{site.locationLabel}</span>
+    <a href={mailTo}>{site.contactEmail}</a>
+  </footer>
+</BaseLayout>
